@@ -96,6 +96,7 @@ public class Match {
 		this.teamAwayNAME = teamAwayNAME;
 	}
 
+
 	@Override
 	public String toString() {
 		return "[" + matchID + "] " + teamHomeNAME + " vs. " + teamAwayNAME;

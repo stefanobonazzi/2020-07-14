@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.PremierLeague.model.Model;
+import it.polito.tdp.PremierLeague.model.Team;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,7 +36,7 @@ public class FXMLController {
     private Button btnSimula; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbSquadra"
-    private ComboBox<?> cmbSquadra; // Value injected by FXMLLoader
+    private ComboBox<Team> cmbSquadra; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtN"
     private TextField txtN; // Value injected by FXMLLoader
@@ -48,17 +49,23 @@ public class FXMLController {
 
     @FXML
     void doClassifica(ActionEvent event) {
-
+    	Team team = cmbSquadra.getValue();
+    	txtResult.setText(this.model.getClassifica(team));
     }
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
-
+    	this.model.creaGrafo();
+    	cmbSquadra.getItems().addAll(this.model.getAllTeams());
+    	txtResult.setText("Grafo creato!\n#Vertici: "+this.model.getGraph().vertexSet().size()+"\n#Archi: "+this.model.getGraph().edgeSet().size());
     }
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	int n = Integer.parseInt(txtN.getText());
+    	int x = Integer.parseInt(txtX.getText());
+    	
+    	txtResult.setText(this.model.simula(n, x));
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
